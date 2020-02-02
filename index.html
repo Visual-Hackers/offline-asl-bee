@@ -1,39 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>ASL BEE</title>
-		<link href="css/main.css" rel="stylesheet" />
-	</head>
-
-	<body>
-		<main>
-			<h1>ASL BEE</h1>
-			<section class="speed">
-				<h2 class="label-speed">Speed</h2>
-				<div class="speed">
-					<button class="slow-button">Slow</button>
-					<button class="medium-button">Medium</button>
-					<button class="fast-button">Fast</button>
-				</div>
-			</section>
-			<section class="length">
-				<h2 class="label-length">Length</h2>
-				<div class="size">
-					<button class="short-button">Short</button>
-					<button class="medium-button">Medium</button>
-					<button class="long-button">Long</button>
-				</div>
-			</section>
-			<section class="video">
-				<video width="320" height="240" autoplay>
-					<source src="movie.mp4" type="video/mp4" />
-					<source src="movie.ogg" type="video/ogg" />
-					Your browser does not support the video tag.
-				</video>
-			</section>
-			<aside class="questions">
-				<h4>Words</h4>
-			</aside>
-		</main>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASL Bee</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+      />
+    <title>ASL BEE</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <header>
+      <h1>ASL BEE</h1>
+    </header>
+    <main>
+      <section class="speed">
+        <h2 class="label-speed">Speed</h2>
+        <div class="speed">
+          <button class="slow-button">Slow</button>
+          <button class="medium-button">Medium</button>
+          <button class="fast-button">Fast</button>
+        </div>
+      </section>
+      <section class="length">
+        <h2 class="label-length">Length</h2>
+        <div class="size">
+          <button class="short-button">Short</button>
+          <button class="medium-button">Medium</button>
+          <button class="long-button">Long</button>
+        </div>
+        <!--
+          <button class="btn-new-word"><i class="fas fa-step-forward"></i></button>
+          <section class="show-letter"></section>
+          <button class="btn-difficulty"><i class="fas fa-fist-raised"></i></button>
+          <button class="btn-replay"><i class="fas fa-redo"></i></button>
+          <button class="btn-speed">1x</button>
+        -->
+      </section>
+      <section class="video">
+        <form action="">
+          <input
+            class="input-word"
+            type="text"
+            name="word"
+            placeholder="Answer..."
+            />
+          <input type="submit" name="submit" class="fas fa-check" value="" />
+        </form>
+      </section>
+      <aside class="questions">
+        <h4>Words</h4>
+      </aside>
+    </main>
+    <script src="js/script.js"></script>
+  </body>
 </html>
