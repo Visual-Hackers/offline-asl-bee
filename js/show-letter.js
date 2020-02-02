@@ -1,13 +1,15 @@
 // show-letter.js
 // Show each letter of a word
-let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-async function showLetter(word) {
-  for (let i = 0, len = word.length; i < len; i++) {
+var wait = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+async function show_letter(word) {
+  for (var i = 0; i < word.length; i++) {
     letter.textContent = word[i];
-    checkTime();
+    check_time();
     await wait(time);
   }
   letter.textContent = "";
 }
-let checkTime = () => { if (time <= 0) time = 100; }
-
+let check_time = () => {
+  if (time <= 0) 
+    time = 100;
+}
