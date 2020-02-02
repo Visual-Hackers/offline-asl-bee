@@ -20,10 +20,46 @@ function replayWord() {
     .then(array => showLetter(array[randomNumber]));
 }
 
+// Mode
+let currentMode = 'text';
+let modeBtn = document.querySelector('.btn-mode');
+modeBtn.addEventListener('click', changeMode);
+function checkMode(mode) {
+  if (mode === 'text') {
+    modeBtn.innerHTML = "<img src='img/a.png'/>";
+  } else {
+    modeBtn.innerHTML = "a";
+  }
+}
+function changeMode() {
+  if (currentMode === 'text') {
+    currentMode = 'image';
+  } else {
+    currentMode = 'text';
+  }
+  checkMode(currentMode);
+}
+
+// Cheatsheet
+let cheatSheetMode = 'open';
+let cheatSheet = document.querySelector('.cheat-sheet');
+cheatSheet.addEventListener('click', toggleCheatSheet);
+function toggleCheatSheet() {
+  if (cheatSheetMode === 'open') {
+    cheatSheetMode = 'close';
+    cheatSheet.innerHTML = "<i class='fas fa-arrow-down'></i>";
+    cheatSheet.classList.add("border-transition");
+  } else {
+    cheatSheetMode = 'open';
+    cheatSheet.innerHTML = "<img src='img/cheat-sheet.png'/>";
+    cheatSheet.classList.remove("border-transition");
+  }
+}
+
 // Input
 let wordForm = document.querySelector('form');
 let wordInput = document.querySelector('.input-word');
-let letter = document.querySelector('.show-letter');
+let letter = document.querySelector('.letter');
 wordForm.addEventListener('submit', function(e) {
   e.preventDefault();
   let input = wordInput.value;
@@ -114,7 +150,11 @@ lenBtn.addEventListener('click', () => {
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function showLetter(word) {
   for (let i = 0, len = word.length; i < len; i++) {
-    letter.textContent = word[i];
+    if (currentMode === 'text') {
+      letter.textContent = word[i];
+    } else {
+      letter.innerHTML = "<img src='img/" + word[i] + ".png'/>";
+    }
     checkTime();
     await wait(time);
   }
