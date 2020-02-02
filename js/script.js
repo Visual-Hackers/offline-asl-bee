@@ -1,126 +1,124 @@
-// script.js
-// Control length of a word
-var short_words = "text-files/easy-difficulty.txt";
-var medium_words = "text-files/medium-difficulty.txt";
-var long_words = "text-files/hard-difficulty.txt";
-var difficulty_btn = document.querySelector('.btn-difficulty');
-check_difficulty(difficulty_btn.childNodes);
-function check_difficulty(difficulty) {
-  if (difficulty.length === 1) {
-    word_length = short_words;
-  } else if (difficulty.length === 2) {
-    word_length = medium_words;
-  } else {
-    word_length = long_words;
-  }
-}
-difficulty_btn.addEventListener('click', () => {
-  var i = document.createElement('i');
-  i.className = 'fas fa-fist-raised';
-  if (difficulty_btn.childNodes.length < 3) {
-    difficulty_btn.appendChild(i);
-  } else {
-    difficulty_btn.removeChild(difficulty_btn.childNodes[0]);
-    difficulty_btn.remoteChild(difficulty_btn.childNodes[1]);
-  }
-  check_difficulty(difficulty_btn.childNodes);
-});
-
-// Control rate of fingerspelling a word
-var slower_speed = 1400;
-var slow_speed = 1000;
-var medium_speed = 650;
-var fast_speed = 300;
-var speed_btn = document.querySelector('.btn-speed');
-var speed_multiple = 1;
-check_speed(speed_btn.textContent);
-function check_speed(speed) {
-  if (speed === 'slower') {
-    time = slower_speed;
-  } else if (speed === 'slow') {
-    time = slow_speed;
-  } else if (speed === 'medium') {
-    time = medium_speed;
-  } else {
-    time = fast_speed;
-  }
-}
-speed_btn.addEventListener('click', change_speed);
-function change_speed() => {
-  switch(speed) {
-    case 'slower':
-      speed = 'slow';
-      break;
-    case 'slow':
-      speed = 'medium';
-      break;
-    case 'medium':
-      speed = 'fast';
-      break;
-    case 'fast':
-      speed = 'slower';
-      break;
-    default:
-      speed = 'slower';
-  }
-  speed_btn.textContent = speed;
-  check_speed(speed_btn.textContent);
-});
-
-// Type in a word
-var word_form = document.querySelector('form');
-var word_input = document.querySelector('.input-word');
-var letter = document.querySelector('.letter');
-word_form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  var input = word_input.value;
-  fetch(word_length)
+// Get a random word and show it
+let randomNumber = 0;
+let newWordBtn = document.querySelector('.btn-new-word');
+newWordBtn.addEventListener('click', getWord);
+function getWord() {
+  fetch(wordLength)
+    .then(res => res.json())
     .then(array => {
-      array = array.json;
-      if (input === array[random_index]) {
+      randomNumber = Math.floor(Math.random() * array.length);
+      showLetter(array[randomNumber]);
+    });
+}
+
+// Replay word
+let replayBtn = document.querySelector('.btn-replay');
+replayBtn.addEventListener('click', replayWord);
+function replayWord() {
+  fetch(wordLength)
+    .then(res => res.json())
+    .then(array => showLetter(array[randomNumber]));
+}
+
+// Input
+let wordForm = document.querySelector('form');
+let wordInput = document.querySelector('.input-word');
+let letter = document.querySelector('.show-letter');
+wordForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  let input = wordInput.value;
+  fetch(wordLength)
+    .then(res => res.json())
+    .then(array => {
+      if (input === array[randomNumber]) {
         letter.innerHTML = "<i class='fas fa-check'></i>";
       } else {
         letter.innerHTML = "<i class='fas fa-times'></i>";
       }
     });
-  word_input.value = "";
+  wordInput.value = "";
 });
 
-// Replay a word
-var replay_btn = document.querySelector('btn-replay');
-replay_btn.addEventListener('click', replay_word);
-function replay_word() {
-  fetch(word_length)
-    .then(array => {
-      array = array.json();
-      show_letter(array[random_index]);
-  });
+// Default Speed
+let slowerSpeed = 1300;
+let slowSpeed = 1000;
+let fastSpeed = 700;
+let fasterSpeed = 300;
+let speedBtn = document.querySelector('.btn-speed');
+let currentSpeed = speedBtn.textContent;
+checkSpeed(currentSpeed);
+function checkSpeed(speed) {
+  if (speed === 'Slower') {
+    time = slowerSpeed;
+  } else if (speed === 'Slow') {
+    time = slowSpeed;
+  } else if (speed === 'Fast') {
+    time = fastSpeed;
+  } else if (speed === 'Faster') {
+    time = fasterSpeed;
+  }
 }
+speedBtn.addEventListener('click', () => {
+  switch (currentSpeed) {
+    case 'Slower':
+      currentSpeed = 'Slow';
+      break;
+    case 'Slow':
+      currentSpeed = 'Fast';
+      break;
+    case 'Fast':
+      currentSpeed = 'Faster';
+      break;
+    case 'Faster':
+      currentSpeed = 'Slower';
+  }
+  speedBtn.textContent = currentSpeed;
+  checkSpeed(currentSpeed);
+});
+
+// Control length of word
+let shortWords = "words/words-short.txt";
+let mediumWords = "words/words-medium.txt";
+let longWords = "words/words-long.txt";
+let lenBtn = document.querySelector('.btn-length');
+let currentLength = lenBtn.textContent;
+checkLength(currentLength);
+function checkLength(len) {
+  switch (len) {
+    case 'Short':
+      wordLength = shortWords;
+      break;
+    case 'Medium':
+      wordLength = mediumWords;
+      break;
+    case 'Long':
+      wordLength = longWords;
+  } 
+}
+lenBtn.addEventListener('click', () => {
+  switch (currentLength) {
+    case 'Short':
+      currentLength = 'Medium';
+      break;
+    case 'Medium':
+      currentLength = 'Long';
+      break;
+    case 'Long':
+      currentLength = 'Short';
+  }
+  lenBtn.textContent = currentLength;
+  checkLength(currentLength);
+});
 
 // Show each letter of a word
-var wait = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
-async function show_letter(word) {
-  for (var i = 0; i < word.length; i++) {
+let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+async function showLetter(word) {
+  for (let i = 0, len = word.length; i < len; i++) {
     letter.textContent = word[i];
-    check_time();
+    checkTime();
     await wait(time);
   }
   letter.textContent = "";
 }
-let check_time = () => {
-  if (time <= 0) 
-    time = 100;
-}
+let checkTime = () => { if (time <= 0) time = 100; }
 
-// Show a random word
-var random_index = 0;
-var new_word_btn = document.querySelector('.btn-new-word');
-new_word_btn.addEventListener('click', get_word);
-function get_word() {
-  fetch(word_length)
-    .then(array => {
-      array = array.json;
-      random_index = Math.floor(Math.random() * array.length);
-      show_letter(array[random_index]);
-    });
-}

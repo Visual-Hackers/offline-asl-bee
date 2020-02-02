@@ -10,51 +10,30 @@
       integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
       crossorigin="anonymous"
       />
-    <title>ASL BEE</title>
+    <title>ASL Bee</title>
     <link href="css/main.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
     <header>
-      <h1>ASL BEE</h1>
+      <h1>ASL Bee</h1>
     </header>
     <main>
-      <section class="speed">
-        <h2 class="label-speed">Speed</h2>
-        <div class="speed">
-          <button class="slow-button">Slow</button>
-          <button class="medium-button">Medium</button>
-          <button class="fast-button">Fast</button>
-        </div>
-      </section>
-      <section class="length">
-        <h2 class="label-length">Length</h2>
-        <div class="size">
-          <button class="short-button">Short</button>
-          <button class="medium-button">Medium</button>
-          <button class="long-button">Long</button>
-        </div>
-        <!--
-          <button class="btn-new-word"><i class="fas fa-step-forward"></i></button>
-          <section class="show-letter"></section>
-          <button class="btn-difficulty"><i class="fas fa-fist-raised"></i></button>
-          <button class="btn-replay"><i class="fas fa-redo"></i></button>
-          <button class="btn-speed">1x</button>
-        -->
-      </section>
-      <section class="video">
-        <form action="">
-          <input
-            class="input-word"
-            type="text"
-            name="word"
-            placeholder="Answer..."
-            />
-          <input type="submit" name="submit" class="fas fa-check" value="" />
-        </form>
-      </section>
-      <aside class="questions">
-        <h4>Words</h4>
-      </aside>
+      <section class="show-letter"></section>
+      <label class="label-speed">Speed</label>
+      <button class="btn-speed">Slower</button>
+      <label class="label-length">Length</label>
+      <button class="btn-length">Short</button>
+      <button class="btn-new-word"><i class="fas fa-step-forward"></i></button>
+      <button class="btn-replay"><i class="fas fa-redo"></i></button>
+      <form action="">
+        <input
+          class="input-word"
+          type="text"
+          name="word"
+          placeholder="Answer..."
+          />
+        <input type="submit" name="submit" class="fas fa-check" value="" />
+      </form>
     </main>
     <script src="js/script.js"></script>
   </body>
