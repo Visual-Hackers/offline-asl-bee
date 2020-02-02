@@ -6,6 +6,6 @@ function replay_word() {
   fetch(word_length)
     .then(array => {
       array = array.json();
-      show_letter(array[random_index]));
-    }
+      show_letter(array[random_index]);
+  });
 }
